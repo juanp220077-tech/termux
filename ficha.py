@@ -1,4 +1,4 @@
-import sqlit3
+import sqlite3
 
 class Persona:
     def __init__(self, nombre):
