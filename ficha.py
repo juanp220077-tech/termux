@@ -1,17 +1,24 @@
-import sqlite3
+import sqlit3
 
-class Estudiante:
-	def __init__(self,nombre, carrera):
-		self.nombre = nombre
-		self.carrera = carrera
-	def guardar(self):
-		conn = sqlite3.connect('Unita.db')
-		cursor = conn.cursor()
-		cursor.execute("CREATE TABLE estudiantes (nombre TEXT, carrera TEXT)")
-		cursor.execute("INSERT INTO estudiantes VALUES (?,?)",(self.nombre, self.carrera))
-		conn.commit()
-		conn.close()
-		print(f"Registro de: {self.nombre} guardado correctamente")
-alumno_prueba = Estudiante("Martin Puente", "ingeniero de sistemas")
-alumno_prueba.guardar()
+class Persona:
+    def __init__(self, nombre):
+        self.nombre = nombre  # Atributo público
+        self.__id_interno = "ID-999" # ENCAPSULAMIENTO (privado)
+
+    def saludar(self):
+        print(f"Hola, soy {self.nombre}")
+
+# HERENCIA: Estudiante hereda de Persona
+class Estudiante(Persona):
+    def __init__(self, nombre, carrera):
+        super().__init__(nombre) # Llama al constructor del padre
+        self.carrera = carrera
+
+    def mostrar_detalle(self):
+        print(f"{self.nombre} estudia {self.carrera}")
+
+# Instanciación
+alumno = Estudiante("Juan Puente", "Software")
+alumno.saludar() # Método heredado
+alumno.mostrar_detalle() # Método propio
 
